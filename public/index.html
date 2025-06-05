@@ -14,30 +14,19 @@
                 <div class="w-[300px] h-[90px] text-center">
                     <h1 class="text-[28px]">To-do List</h1>
                     <div class="bg-white-fields border-2 border-cream-buttons rounded-[25px]">
-                        <input type="text" class="w-[300px] h-[40px] outline-0 mx-[8px] text-[18px]">
+                        <input id="input-el" type="text" required class="w-[300px] h-[40px] outline-0 mx-[8px] text-[18px]">
                     </div>
                 </div>
 
                 <div class="flex w-[300px] h-[40px] my-[15px] gap-[15px] text-[18px]">
-                    <button class="w-[90px] h-[40px] bg-cream-buttons rounded-[15px] cursor-pointer active:scale-90 transform duration-80 ease-in-out">add</button>
-                    <button class="w-[90px] h-[40px] bg-cream-buttons rounded-[15px] cursor-pointer active:scale-90 transform duration-80 ease-in-out">view</button>
-                    <button class="w-[90px] h-[40px] bg-cream-buttons rounded-[15px] cursor-pointer active:scale-90 transform duration-80 ease-in-out">delete</button>
+                    <button id="addbtn-el" class="w-[90px] h-[40px] bg-cream-buttons rounded-[15px] cursor-pointer active:scale-90 transform duration-80 ease-in-out">add</button>
+                    <button id="viewbtn-el" class="w-[90px] h-[40px] bg-cream-buttons rounded-[15px] cursor-pointer active:scale-90 transform duration-80 ease-in-out">view</button>
+                    <button id="deletebtn-el" class="w-[90px] h-[40px] bg-cream-buttons rounded-[15px] cursor-pointer active:scale-90 transform duration-80 ease-in-out">delete</button>
                 </div>
 
                 <div class="w-[480px] h-[300px] bg-white-fields border-2 border-cream-buttons rounded-[15px] text-[20px]">
-                    <ul class="mx-[15px] my-[10px]">
-                        <li class="flex items-center gap-[10px]">
-                            <img src="images/checkbox.png" class="w-[20px] h-[20px]">
-                            Wash the dishes
-                        </li>
-                        <li class="flex items-center gap-[10px]">
-                            <img src="images/checkbox.png" class="w-[20px] h-[20px]">
-                            Pay bills and taxes
-                        </li>
-                        <li class="flex items-center gap-[10px]">
-                            <img src="images/checkbox.png" class="w-[20px] h-[20px]">
-                            Maglulu to lessen stress
-                        </li>
+                    <ul id="list-el" class="mx-[15px] my-[10px]">
+                        
                     </ul>
                 </div>
 
