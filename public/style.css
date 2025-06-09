@@ -164,12 +164,6 @@
   }
 }
 @layer utilities {
-  .mx-\[8px\] {
-    margin-inline: 8px;
-  }
-  .mx-\[10px\] {
-    margin-inline: 10px;
-  }
   .mx-\[15px\] {
     margin-inline: 15px;
   }
@@ -206,17 +200,11 @@
   .h-screen {
     height: 100vh;
   }
-  .max-h-\[300px\] {
-    max-height: 300px;
-  }
   .w-\[20px\] {
     width: 20px;
   }
   .w-\[90px\] {
     width: 90px;
-  }
-  .w-\[290px\] {
-    width: 290px;
   }
   .w-\[300px\] {
     width: 300px;
@@ -245,8 +233,17 @@
   .items-center {
     align-items: center;
   }
+  .items-end {
+    align-items: flex-end;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
   .justify-center {
     justify-content: center;
+  }
+  .justify-end {
+    justify-content: flex-end;
   }
   .gap-\[10px\] {
     gap: 10px;
@@ -283,12 +280,6 @@
   .bg-white-fields {
     background-color: var(--color-white-fields);
   }
-  .px-\[5px\] {
-    padding-inline: 5px;
-  }
-  .px-\[10px\] {
-    padding-inline: 10px;
-  }
   .px-\[15px\] {
     padding-inline: 15px;
   }
@@ -316,6 +307,12 @@
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
+  }
+  .text-cream-buttons {
+    color: var(--color-cream-buttons);
+  }
+  .line-through {
+    text-decoration-line: line-through;
   }
   .underline {
     text-decoration-line: underline;
