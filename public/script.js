@@ -1,13 +1,25 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
+import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-database.js";
+
+const firebaseConfig = {
+    databaseURL: "https://todolist-df1cd-default-rtdb.asia-southeast1.firebasedatabase.app/"
+}
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+const refInDB = ref(database, "Lists");
+
+onValue(refInDB, function(snapshot) {
+    console.log(snapshot.val());
+})
+
 const inputEl = document.querySelector("#input-el");
 const addBtnEl = document.querySelector("#addbtn-el");
 const viewBtnEl = document.querySelector("#viewbtn-el");
 const deleteBtnEl = document.querySelector("#deletebtn-el");
 const ulEl = document.querySelector("#list-el");
 
-let taskData = [];
 let taskCheckBox = ["images/checkbox.svg", "images/checkbox-fill.svg"];
-
-let getDatafromStorage = JSON.parse(localStorage.getItem("listKey"));
 
 function renderList() {
     let newList = "";
@@ -15,7 +27,7 @@ function renderList() {
         newList += `
         <li class="flex items-center gap-[10px]" data-index="${i}">
             <img src="${taskCheckBox[0]}" class="w-[20px] h-[20px]" data-status="unchecked">
-            <span>${taskData[i]}</span>
+            <span></span>
         </li>
         `
     }
@@ -47,8 +59,7 @@ function toggleTaskStatus(event) {
 
 addBtnEl.addEventListener("click", function() {
     if (inputEl.value != "") {
-        taskData.push(inputEl.value);
-        localStorage.setItem("listKey", JSON.stringify(taskData));
+        push(refInDB, inputEl.value);
         inputEl.value = "";
         renderList();
     } else {
@@ -58,15 +69,10 @@ addBtnEl.addEventListener("click", function() {
 })
 
 viewBtnEl.addEventListener("click", function() {
-        if (getDatafromStorage) {
-        taskData = getDatafromStorage;
-        renderList();
-    }
+
 })
 
 deleteBtnEl.addEventListener("click", function() {
-    taskData.splice(0, taskData.length);
-    localStorage.clear();
     ulEl.innerHTML = "";
     renderList();
 })
