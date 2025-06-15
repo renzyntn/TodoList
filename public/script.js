@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-app.js";
-import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-database.js";
+import { getDatabase, ref, push, onValue, remove } from "https://www.gstatic.com/firebasejs/11.9.0/firebase-database.js";
 
 const firebaseConfig = {
     databaseURL: "https://todolist-df1cd-default-rtdb.asia-southeast1.firebasedatabase.app/"
@@ -7,10 +7,16 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-const refInDB = ref(database, "Lists");
+const refInDB = ref(database, "todoList");
 
 onValue(refInDB, function(snapshot) {
-    console.log(snapshot.val());
+    const snapshotExist = snapshot.exists();
+
+    if (snapshotExist) {
+        const snapshotValues = snapshot.val();
+        const taskLists = Object.values(snapshotValues);
+        renderList(taskLists);
+    }
 })
 
 const inputEl = document.querySelector("#input-el");
@@ -21,13 +27,13 @@ const ulEl = document.querySelector("#list-el");
 
 let taskCheckBox = ["images/checkbox.svg", "images/checkbox-fill.svg"];
 
-function renderList() {
+function renderList(taskData) {
     let newList = "";
     for (let i = 0; i < taskData.length; i++) {
         newList += `
         <li class="flex items-center gap-[10px]" data-index="${i}">
             <img src="${taskCheckBox[0]}" class="w-[20px] h-[20px]" data-status="unchecked">
-            <span></span>
+            <span>${taskData[i]}</span>
         </li>
         `
     }
@@ -69,10 +75,10 @@ addBtnEl.addEventListener("click", function() {
 })
 
 viewBtnEl.addEventListener("click", function() {
-
+    
 })
 
 deleteBtnEl.addEventListener("click", function() {
+    remove(refInDB);
     ulEl.innerHTML = "";
-    renderList();
 })
