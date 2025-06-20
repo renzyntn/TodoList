@@ -9,16 +9,6 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 const refInDB = ref(database, "todoList");
 
-onValue(refInDB, function(snapshot) {
-    const snapshotExist = snapshot.exists();
-
-    if (snapshotExist) {
-        const snapshotValues = snapshot.val();
-        const taskLists = Object.values(snapshotValues);
-        renderList(taskLists);
-    }
-})
-
 const inputEl = document.querySelector("#input-el");
 const addBtnEl = document.querySelector("#addbtn-el");
 const viewBtnEl = document.querySelector("#viewbtn-el");
@@ -27,7 +17,17 @@ const ulEl = document.querySelector("#list-el");
 
 let taskCheckBox = ["images/checkbox.svg", "images/checkbox-fill.svg"];
 
-function renderList(taskData) {
+onValue(refInDB, function(snapshot) {
+        const snapshotExist = snapshot.exists();
+
+        if (snapshotExist) {
+            const snapshotValues = snapshot.val();
+            const taskLists = Object.values(snapshotValues);
+            renderList(taskLists);
+        }
+})
+
+const renderList = ((taskData) => {
     let newList = "";
     for (let i = 0; i < taskData.length; i++) {
         newList += `
@@ -43,9 +43,9 @@ function renderList(taskData) {
     listItems.forEach(item => {
         item.addEventListener("click", toggleTaskStatus);
     })
-}
+});
 
-function toggleTaskStatus(event) {
+const toggleTaskStatus = ((event) => {
     const listItem = event.currentTarget;
     const checkboxImage = listItem.querySelector("img");
     const taskText = listItem.querySelector("span");
@@ -61,9 +61,9 @@ function toggleTaskStatus(event) {
 
         taskText.classList.remove("line-through");
     }
-}
+});
 
-addBtnEl.addEventListener("click", function() {
+addBtnEl.addEventListener("click", () => {
     if (inputEl.value != "") {
         push(refInDB, inputEl.value);
         inputEl.value = "";
@@ -72,13 +72,13 @@ addBtnEl.addEventListener("click", function() {
         inputEl.setAttribute("required", "true");
         inputEl.reportValidity();
     }
-})
+});
 
-viewBtnEl.addEventListener("click", function() {
-    
-})
+viewBtnEl.addEventListener("click", () => {
 
-deleteBtnEl.addEventListener("click", function() {
+});
+
+deleteBtnEl.addEventListener("click", () => {
     remove(refInDB);
     ulEl.innerHTML = "";
-})
+});
